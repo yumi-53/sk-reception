@@ -10,7 +10,19 @@
 <body>
     <p>{{ $user->name }}さん</p>
     <p>会員情報</p>
-    <a href="{{ route('user.edit', $user) }}">編集</a>
+    <div>
+        <a href="{{ route('user.edit', $user) }}">編集</a>
+    </div>
+    
+    <a href="{{ route('logout') }}"
+        onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();">
+        ログアウト
+    </a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+        @csrf
+    </form>
+
     <p>QRコード表示</p>
 
     @if (session('flash_message'))
@@ -20,6 +32,7 @@
     @if (session('error_message'))
         <p>{{ session('error_message') }}</p>
     @endif
+    
 
 </body>
 

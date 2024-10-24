@@ -9,6 +9,13 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        <!-- Kana -->
+        <div>
+            <x-input-label for="kana" :value="__('Kana')" />
+            <x-text-input id="kana" class="block mt-1 w-full" type="text" name="kana" :value="old('kana')" required pattern="\A[ァ-ヴー\s]+\z" autofocus autocomplete="kana" />
+            <x-input-error :messages="$errors->get('kana')" class="mt-2" />
+        </div>
+
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
