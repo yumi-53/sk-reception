@@ -23,7 +23,10 @@
         @csrf
     </form>
 
-    <p>QRコード表示</p>
+    <p>QRコードを生成（デフォルトは100）</p>
+    {!! QrCode::size(200)->generate(url('admin?id='.$user->id)) !!}
+    <br>
+
 
     @if (session('flash_message'))
         <p>{{ session('flash_message') }}</p>
