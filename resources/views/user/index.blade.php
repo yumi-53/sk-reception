@@ -24,7 +24,8 @@
     </form>
 
     <p>QRコードを生成（デフォルトは100）</p>
-    {!! QrCode::size(200)->generate(url('admin?id='.$user->id)) !!}
+    {!! QrCode::size(200)->generate(url('admin/reception?id='.$user->id)) !!}
+
     <br>
 
 

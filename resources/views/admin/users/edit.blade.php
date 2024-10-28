@@ -10,7 +10,7 @@
 <body>
     <h1>会員情報編集</h1>
 
-    <form method="post" action="{{ route('user.update', $user) }}">
+    <form method="post" action="{{ route('admin.users.update', $user) }}">
         @csrf
         @method('patch')
         <label for="name">氏名</label>
