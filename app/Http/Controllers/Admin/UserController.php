@@ -4,10 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Http\Requests\UserRequest;
-use Illuminate\Validation\Rule;
+use App\Http\Requests\admin\UserRequest;
 
 
 class UserController extends Controller
@@ -18,22 +16,15 @@ class UserController extends Controller
         return view('admin.users.index', compact('users'));
     }
     
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
         return view('admin.users.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'kana' => ['required', 'string', 'regex:/\A[ァ-ヴー\s]+\z/u', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($id)],
-        ]);
-
 		User::updateOrCreate(
-			['id' => $id],[
+			['id' => $user->id],[
 			'name' => $request->input('name'),
             'kana' =>  $request->input('kana'),
             'email' => $request->input('email'),
