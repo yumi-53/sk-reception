@@ -15,39 +15,38 @@ class UserController extends Controller
         return view('user.index', compact('user'));
     }
 
-    public function edit($id)
+    public function edit(User $user)
     {
-        if (Auth::id() == $id) {
-            $user = User::find($id);
-			return view('user.edit', compact('user'));
-        } else {
+        if (Auth::id() !== $user->id) {
 			return redirect()->route('user.index')->with('error_message', '不正なアクセスです。');
 		}
+        return view('user.edit', compact('user'));
     }
 
-    public function update(UserRequest $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-        if (Auth::id() == $id) {
-			User::updateOrCreate(
-				['id' => $id],[
-				'name' => $request->input('name'),
-                'kana' =>  $request->input('kana'),
-                'email' => $request->input('email'),
-				],
-			);
+        if (Auth::id() !== $user->id) {
 			return redirect()->route('user.index')->with('flash_message', '会員情報を編集しました。');
-		} else {
-			return redirect()->route('user.index')->with('error_message', '不正なアクセスです。');
-		}
+        }
+        
+		User::updateOrCreate(
+			['id' => $user->id],[
+			'name' => $request->input('name'),
+            'kana' =>  $request->input('kana'),
+            'email' => $request->input('email'),
+			],
+		);
+		return redirect()->route('user.index')->with('flash_message', '会員情報を編集しました。');
+		
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        if (Auth::id() == $id) {
-			User::find($id)->delete();
-			return redirect()->route('user.index')->with('flash_message', '会員情報を削除しました。');
-		} else {
-			return redirect()->route('user.index')->with('error_message', '不正なアクセスです。');
-		}
+        if (Auth::id() !== $user->id) {
+            return redirect()->route('user.index')->with('error_message', '不正なアクセスです。');
+        }
+	
+        $user->delete();
+		return redirect()->route('user.index')->with('flash_message', '会員情報を削除しました。');
     }
 }
