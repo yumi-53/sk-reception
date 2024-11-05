@@ -1,50 +1,64 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('layouts.app')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-7">
+            <h3 class="mb-4 text-center">ログイン</h3>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+            <hr>
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <div class="form-group mb-3">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror samuraimart-login-input" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="メールアドレス">
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>メールアドレスが正しくない可能性があります。</strong>
+                    </span>
+                    @enderror
+                </div>
+    
+                <div class="form-group mb-3">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror samuraimart-login-input" name="password" required autocomplete="current-password" placeholder="パスワード">
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>パスワードが正しくない可能性があります。</strong>
+                    </span>
+                    @enderror
+                </div>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+                <div class="form-group mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+                        <label class="form-check-label samuraimart-check-label w-100" for="remember">
+                            次回から自動的にログインする
+                        </label>
+                    </div>
+                </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+                <div class="form-group d-flex justify-content-center mb-4">
+                    <button type="submit" class="btn text-white shadow-sm w-100 sk-btn">
+                        ログイン
+                    </button>
+                </div>
+                
+                <hr class="my-4">
+            </form>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
-                会員登録
-            </a>
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+            <div class="text-center mb-3">
+                <a href="{{ route('password.request') }}">
+                    パスワードをお忘れの場合
                 </a>
-            @endif
-
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+            </div>
+            <div class="text-center">
+                <a href="{{ route('register') }}">
+                    新規登録はこちら
+                </a>
+            </div>
         </div>
-    </form>
-</x-guest-layout>
+    </div>
+</div>
+@endsection
+
