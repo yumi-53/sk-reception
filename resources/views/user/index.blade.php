@@ -1,43 +1,31 @@
-<!DOCTYPE html>
-<html lang="ja">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-</head>
+@extends('layouts.app')
+@section('content')
 
-<body>
-    <p>{{ $user->name }}さん</p>
-    <p>会員情報</p>
-    <div>
-        <a href="{{ route('user.edit', $user) }}">編集</a>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-7">
+            <h2 class="mb-4 text-center">QRコードでログイン</h2>
+            @if (session('flash_message'))
+            <div class="alert alert-info" role="alert">
+                <p class="mb-0">{{ session('flash_message') }}</p>
+            </div>
+            @endif
+
+            @if (session('error_message'))
+            <div class="alert alert-info" role="alert">
+                <p class="mb-0">{{ session('error_message') }}</p>
+            </div>
+            @endif
+
+            <div class="mb-4 text-center">
+            {!! QrCode::size(200)->generate(url('admin/reception?id='.$user->id)) !!}
+            </div>
+
+            <p class="mb-3 text-center">QRコードをスタッフに提示してください。</p>
+
+
+        </div>
     </div>
-    
-    <a href="{{ route('logout') }}"
-        onclick="event.preventDefault();
-        document.getElementById('logout-form').submit();">
-        ログアウト
-    </a>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-        @csrf
-    </form>
-
-    <p>QRコードを生成（デフォルトは100）</p>
-    {!! QrCode::size(200)->generate(url('admin/reception?id='.$user->id)) !!}
-
-    <br>
-
-
-    @if (session('flash_message'))
-        <p>{{ session('flash_message') }}</p>
-    @endif
-
-    @if (session('error_message'))
-        <p>{{ session('error_message') }}</p>
-    @endif
-    
-
-</body>
-
-</html>
+</div>
+@endsection

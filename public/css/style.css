@@ -28,3 +28,13 @@
     top: 500px;
     left: 0px;
 }
+
+
+a {
+    color: #000438;
+    text-decoration: none !important;
+}
+.sk-btn {
+    background-color: #00076e !important;
+    transition: 0.15s;
+}
