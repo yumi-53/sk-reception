@@ -1,30 +1,68 @@
-<!DOCTYPE html>
-<html lang="ja">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-</head>
+@push('scripts')
+    <script src="{{ asset('/js/user-modal.js') }}"></script>
+@endpush
 
-<body>
-    <h1>会員情報編集</h1>
+@section('content')
 
-    <form method="post" action="{{ route('admin.users.update', $user) }}">
-        @csrf
-        @method('patch')
-        <label for="name">氏名</label>
-        <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" required autocomplete="name" placeholder="田中 太郎">
-    
-        <label for="kana">フリガナ</label>
-        <input type="text" name="kana" id="kana" value="{{ old('kana', $user->kana) }}" required pattern="^[ァ-ヴー\s]+$" title="フリガナは全角カタカナで入力してください。" placeholder="タナカ タロウ">
-        
-        <label for="email">メールアドレス</label>
-        <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" required autocomplete="email" placeholder="taro.tanaka@example.com">
+<div class="col container">
+    <div class="row justify-content-center">
+        <div class="col-xxl-7 col-xl-10 col-lg-11">
+            <h2 class="mb-4 text-center">会員情報編集</h2>
 
-        <button type="submit">更新</button>
-    </form>
+            <hr class="mb-4">
 
-</body>
+            <form method="post" action="{{ route('admin.users.update', $user) }}">
+                @csrf
+                @method('patch')
+                <div class="form-group row mb-3">
+                    <label for="name" class="col-md-5 col-form-label text-md-left fw-bold">
+                        <div class="d-flex align-items-center">
+                            <span class="me-1">氏名</span>
+                        </div>
+                    </label>
 
-</html>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus placeholder="田中 太郎">
+                    </div>
+                </div>
+
+
+                <div class="form-group row mb-3">
+                    <label for="kana" class="col-md-5 col-form-label text-md-left fw-bold">
+                        <div class="d-flex align-items-center">
+                            <span class="me-1">フリガナ</span>
+                        </div>
+                    </label>
+
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="kana" name="kana" value="{{ old('kana', $user->kana) }}" required pattern="\A[ァ-ヴー\s]+\z" title="フリガナは全角カタカナで入力してください。" placeholder="タナカ タロウ">
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    <label for="email" class="col-md-5 col-form-label text-md-left fw-bold">
+                        <div class="d-flex align-items-center">
+                            <span class="me-1">メールアドレス</span>
+                            <span class="badge bg-danger">必須</span>
+                        </div>
+                    </label>
+
+                    <div class="col-md-7">
+                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email" placeholder="tanaka.taro@example.com">
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="form-group d-flex justify-content-center mb-4">
+                    <button type="submit" class="btn text-white shadow-sm w-50 sk-btn">
+                        更新
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
