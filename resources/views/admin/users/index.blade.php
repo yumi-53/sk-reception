@@ -14,8 +14,19 @@
             <hr class="mb-4">
 
             <!-- keyword -->
+            <div class="d-flex justify-content-between align-items-end">
+                <form method="GET" action="{{ route('admin.users.index') }}" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="氏名・フリガナで検索" name="keyword" value="{{ $keyword }}">
+                        <button type="submit" class="btn text-white shadow-sm sk-btn">検索</button>
+                    </div>
+                </form>
+            </div>
 
-            
+            <div>
+                <p class="mb-0">計{{ number_format((float)$total) }}件</p>
+            </div>
+
 
             @if (session('flash_message'))
             <div class="alert alert-info" role="alert">
@@ -29,7 +40,7 @@
             </div>
             @endif
 
-            <table class="table table-hover mb-4 nagoyameshi-users-table">
+            <table class="table table-hover mb-4">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
