@@ -33,7 +33,7 @@ class ReceptionController extends Controller
         if (!User::where('id', $user_id)->exists()) {
             return redirect()->route('admin.reception.index')->with('flash_message',  "会員情報が見当たりません。");
         } elseif ($duplication){
-            return redirect()->route('admin.reception.index')->with('flash_message',  $user->name ."様、受付済みです");
+            return redirect()->route('admin.reception.index')->with('flash_message',  $user->name ."様、本日はすでに受付済みです");
         } else {
         Reception::create([
             'user_id' => $user_id,

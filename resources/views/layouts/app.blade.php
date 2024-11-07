@@ -49,6 +49,7 @@
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('admin.users.index') }}">会員一覧</a>
+                                <a class="dropdown-item" href="{{ route('admin.reception.create') }}">QRコード受付</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('admin.logout') }}"
                                 onclick="event.preventDefault();
@@ -82,6 +83,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('user.edit', $user) }}">会員情報変更</a>
+
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

@@ -3,7 +3,7 @@ const video = document.getElementById('video');
 let contentWidth;
 let contentHeight;
 
-const media = navigator.mediaDevices.getUserMedia({ audio: false, video: {width:640, height:480} })
+const media = navigator.mediaDevices.getUserMedia({ audio: false, video: {width:500, height:480} })
     .then((stream) => {
         video.srcObject = stream;
         video.onloadeddata = () => {
@@ -39,14 +39,13 @@ const checkImage = () => {
    // 検出結果に合わせて処理を実施
     if (code) {
         drawRect(code.location);
-        document.getElementById('qr-msg').textContent = `QRコード：${code.data}`;
         const url = code.data;
         var id = url.substr(url.indexOf('=') + 1);
         // console.log(id);
         document.getElementById('user_id').value = id;
         document.forms["login"].submit();
     } else {
-        console.log("QRcodeが見つかりません…", code);
+        console.log("QRcodeが見つかりません…");
         rectCtx.clearRect(0, 0, contentWidth, contentHeight);
         document.getElementById('user_id').value = "";
     }
