@@ -10,10 +10,21 @@ use App\Http\Requests\admin\UserRequest;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {   
+        $keyword = $request->keyword;
         $users = User::paginate(15);
-        return view('admin.users.index', compact('users'));
+
+        if ($keyword == null) {
+            $users = User::paginate(15);
+        } else {
+            $users = User::where('name', 'like', "%{$keyword}%")
+                        ->orWhere('kana', 'like', "%{$keyword}%")
+                        ->paginate(15);
+        }
+        $total = $users->total();        
+        
+        return view('admin.users.index', compact('users', 'total', 'keyword'));
     }
     
     public function edit(User $user)

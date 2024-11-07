@@ -45,7 +45,6 @@
                     <label for="email" class="col-md-5 col-form-label text-md-left fw-bold">
                         <div class="d-flex align-items-center">
                             <span class="me-1">メールアドレス</span>
-                            <span class="badge bg-danger">必須</span>
                         </div>
                     </label>
 

@@ -17,8 +17,8 @@ Route::middleware('guest:admin')->group(function () {
 
 // 認証済みの管理者のみ
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin'], function () {
-    Route::get('home', [UserController::class, 'index'])->name('users.index');
-    Route::resource('users', UserController::class)->only(['edit', 'update', 'destroy']);
+    Route::get('users/index', [UserController::class, 'index'])->name('users.index');
+    Route::resource('users', UserController::class)->only(['index', 'edit', 'update', 'destroy']);
 
     Route::resource('reception', ReceptionController::class)->only(['index', 'create', 'store']);
 
