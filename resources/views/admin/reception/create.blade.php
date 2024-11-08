@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@push('scripts')
+    <script src="{{ asset('/js/jsQR.js') }}"></script>
+    <script src="{{ asset('/js/reception.js') }}"></script>
+@endpush
 
 @section('content')
 <div class="container">
@@ -15,8 +19,7 @@
                     <input type="hidden" id="user_id" name="user_id" value="">
                 </form>
 
-                <script src="{{ asset('/js/jsQR.js') }}"></script>
-                <script src="{{ asset('/js/reception.js') }}"></script>
+
             </div>
         </div>
     </div>
