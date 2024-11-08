@@ -4,9 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\ReceptionController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Livewire\ReceptionsQrcd;
-
-use function Termwind\render;
 
 // 管理者ゲストのみ
 Route::middleware('guest:admin')->group(function () {
@@ -17,6 +14,7 @@ Route::middleware('guest:admin')->group(function () {
 
 // 認証済みの管理者のみ
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin'], function () {
+    Route::get('home', [UserController::class, 'index']);
     Route::get('users/index', [UserController::class, 'index'])->name('users.index');
     Route::resource('users', UserController::class)->only(['index', 'edit', 'update', 'destroy']);
 

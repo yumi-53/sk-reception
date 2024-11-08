@@ -1,16 +1,17 @@
-// ユーザーの削除用フォーム
-const deleteUserForm = document.forms.deleteUserForm;
+document.addEventListener('DOMContentLoaded', (event) => {
+  // ユーザーの削除用フォーム
+  const deleteUserForm = document.forms.deleteUserForm;
 
-// 削除の確認メッセージ
-const deleteMessage = document.getElementById('deleteUserModalLabel');
+  // 削除の確認メッセージ
+  const deleteMessage = document.getElementById('deleteUserModalLabel');
 
-// タグの削除用モーダルを開くときの処理
-document.getElementById('deleteUserModal').addEventListener('show.bs.modal', (event) => {
-  let deleteButton = event.relatedTarget;
-  let categoryId = deleteButton.dataset.useId;
-  let categoryName = deleteButton.dataset.userName;
+  // モーダルを開くときの処理
+  document.getElementById('deleteUserModal').addEventListener('show.bs.modal', (event) => {
+      let deleteButton = event.relatedTarget;
+      let userId = deleteButton.dataset.userId;
+      let userName = deleteButton.dataset.userName;
 
-  deleteCategoryForm.action = `users/${useId}`;
-  deleteMessage.textContent = `「${userName}」を削除してもよろしいですか？`
+      deleteUserForm.action = `/sk-reception/public/admin/users/${userId}`;
+      deleteMessage.textContent = `「${userName}」を削除してもよろしいですか？`;
+  });
 });
-
