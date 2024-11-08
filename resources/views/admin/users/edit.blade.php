@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@push('scripts')
-    <script src="{{ asset('/js/user-modal.js') }}"></script>
-@endpush
-
 @section('content')
 
 <div class="col container">

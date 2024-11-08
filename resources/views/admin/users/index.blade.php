@@ -6,6 +6,25 @@
 
 @section('content')
 
+<!-- ユーザーの削除用モーダル -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteUserModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+            </div>
+            <div class="modal-footer">
+                <form action="" method="post" name="deleteUserForm">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn text-white shadow-sm sk-btn">削除</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="col container">
     <div class="row justify-content-center">
         <div class="col-xxl-7 col-xl-10 col-lg-11">
@@ -24,7 +43,7 @@
             </div>
 
             <div>
-                <p class="mb-0">計{{ number_format((float)$total) }}件</p>
+                <p class="mb-4">計{{ number_format((float)$total) }}件</p>
             </div>
 
 
@@ -57,7 +76,7 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->kana }}</td>
                             <td><a href="{{ route('admin.users.edit', $user) }}">編集</a></td>
-                            <td><a href="#" class="link-secondary" data-bs-toggle="modal" data-bs-target="#deleteUserModal" data-category-id="{{ $user->id }}" data-category-name="{{ $user->name }}">削除</a></td>
+                            <td><a href="#" class="link-secondary" data-bs-toggle="modal" data-bs-target="#deleteUserModal" data-user-id="{{ $user->id }}" data-user-name="{{ $user->name }}">削除</a></td>
                         </tr>
                     @endforeach
                 </tbody>
