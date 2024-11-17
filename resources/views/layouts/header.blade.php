@@ -19,6 +19,7 @@
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('admin.users.index') }}">会員一覧</a>
                             <a class="dropdown-item" href="{{ route('admin.reception.create') }}">QRコード受付</a>
+                            <a class="dropdown-item" href="{{ route('admin.reception.index') }}">受付リスト</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('admin.logout') }}"
                             onclick="event.preventDefault();

@@ -14,7 +14,7 @@ class Reception extends Model
         'reception_data',
     ];
 
-    public function reception_user() {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 }
