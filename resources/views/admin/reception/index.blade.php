@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('scripts')
+    <script src="{{ asset('/js/reception-date-clear.js') }}"></script>
+@endpush
+
 @section('content')
 
 <div class="container">
@@ -15,6 +19,7 @@
                     <input type="date" class="form-control" name="start_date" value="{{ request('start_date') }}">
                     <input type="date" class="form-control" name="end_date" value="{{ request('end_date') }}">
                     <button type="submit" class="btn text-white shadow-sm sk-btn">フィルター</button>
+                    <button type="button" class="btn text-white shadow-sm btn-secondary ms-2" id="clear-dates">クリア</button>
                 </div>
             </form>
 
