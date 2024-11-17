@@ -6,9 +6,9 @@
 
 @section('content')
 
-<div class="container">
+<div class="col container">
     <div class="row justify-content-center">
-        <div class="col-xl-5 col-lg-4 col-md-5 col-sm-7">
+        <div class="col-xxl-7 col-xl-10 col-lg-11">
             <h2 class="mb-4 text-center">受付リスト</h2>
 
             <hr class="mb-4">
@@ -19,7 +19,7 @@
                     <input type="date" class="form-control" name="start_date" value="{{ request('start_date') }}">
                     <input type="date" class="form-control" name="end_date" value="{{ request('end_date') }}">
                     <button type="submit" class="btn text-white shadow-sm sk-btn">フィルター</button>
-                    <button type="button" class="btn text-white shadow-sm btn-secondary ms-2" id="clear-dates">クリア</button>
+                    <button type="button" class="btn text-white shadow-sm btn-secondary ms-1" id="clear-dates">クリア</button>
                 </div>
             </form>
 
