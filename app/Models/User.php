@@ -43,7 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function reception_datas() {
+    public function receptions() {
         return $this->hasMany(Reception::class);
     }
 }

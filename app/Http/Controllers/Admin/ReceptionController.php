@@ -11,9 +11,22 @@ use Carbon\Carbon;
 
 class ReceptionController extends Controller
 {
-    public function index()
-    { 
-        return view('admin.reception.index');
+    public function index(Request $request)
+    {
+        $query = Reception::query();
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $startDate = Carbon::parse($request->input('start_date'))->startOfDay();
+            $endDate = Carbon::parse($request->input('end_date'))->endOfDay();
+            $receptionsData = $query->whereBetween('reception_data', [$startDate, $endDate]);
+        } else {
+            $today = Carbon::now()->format('Y-m-d');
+            $receptionsData = Reception::whereDate('reception_data', $today);
+        }
+        $receptions = $receptionsData->orderBy('reception_data', 'desc')
+                                    ->paginate(15); 
+        $total = $receptions->total();
+
+        return view('admin.reception.index', compact('receptions', 'total'));
     }
 
     public function create()
