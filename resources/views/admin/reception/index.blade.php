@@ -14,7 +14,7 @@
             <hr class="mb-4">
 
             <!-- 日付範囲フィルター -->
-            <form method="GET" action="{{ route('admin.reception.index') }}" class="mb-4">
+            <form id="filterForm" method="GET" action="{{ route('admin.reception.index') }}" class="mb-4">
                 <div class="input-group">
                     <input type="date" class="form-control" name="start_date" value="{{ request('start_date') }}">
                     <input type="date" class="form-control" name="end_date" value="{{ request('end_date') }}">
@@ -25,7 +25,17 @@
 
             
             <div>
-                <p class="mb-4">計{{ number_format((float)$total) }}件</p>
+                @if (empty(request('start_date')) || empty(request('end_date'))) 
+                <p class="mb-4">本日の受付：計{{ number_format((float)$total) }}件
+                @else
+                <p class="mb-4">検索期間：計{{ number_format((float)$total) }}件
+                @endif
+                    <span class="fs-6">
+                        @if ($total > 15)
+                            （{{ 15 * $receptions->currentPage() - 14 }}～{{ 15 * $receptions->currentPage() }}件）
+                        @endif
+                    </span>
+                </p>
             </div>
 
             @if (session('flash_message'))

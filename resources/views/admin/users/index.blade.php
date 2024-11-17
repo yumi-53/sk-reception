@@ -43,7 +43,13 @@
             </div>
 
             <div>
-                <p class="mb-4">計{{ number_format((float)$total) }}件</p>
+                <p class="mb-4">計{{ number_format((float)$total) }}件   
+                    <span class="fs-6">
+                        @if ($total > 15)
+                            （{{ 15 * $users->currentPage() - 14 }}～{{ 15 * $users->currentPage() }}件）
+                        @endif
+                    </span>
+                </p>
             </div>
 
 
