@@ -73,6 +73,7 @@
                         <th scope="col">フリガナ</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,6 +82,13 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->kana }}</td>
+                            <td>
+                                <form method="post" action="{{ route('admin.reception.store') }}" name="login">
+                                    @csrf
+                                    <input type="hidden" id="user_id" name="user_id" value="{{ $user->id }}">
+                                    <button type="submit" class="sk-input-btn">受付</button>
+                                </form>
+                            </td>                            
                             <td><a href="{{ route('admin.users.edit', $user) }}">編集</a></td>
                             <td><a href="#" class="link-secondary" data-bs-toggle="modal" data-bs-target="#deleteUserModal" data-user-id="{{ $user->id }}" data-user-name="{{ $user->name }}">削除</a></td>
                         </tr>
