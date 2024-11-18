@@ -54,4 +54,10 @@ class ReceptionController extends Controller
         return redirect()->route('admin.reception.index')->with('flash_message',  $user->name ."様の受付完了しました。");
         }
     }
+
+    public function destroy($id)
+    {
+		Reception::find($id)->delete();
+		return redirect()->route('admin.reception.index')->with('flash_message', '受付を取消しました。');
+    }
 }
