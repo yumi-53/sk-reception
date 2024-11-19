@@ -18,7 +18,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
     Route::get('users/index', [UserController::class, 'index'])->name('users.index');
     Route::resource('users', UserController::class)->only(['index', 'edit', 'update', 'destroy']);
 
-    Route::resource('reception', ReceptionController::class)->only(['index', 'create', 'store']);
+    Route::resource('reception', ReceptionController::class)->only(['index', 'create', 'store', 'destroy']);
 
     Route::post('logout', [Admin\Auth\AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });

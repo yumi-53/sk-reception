@@ -12,6 +12,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
       let userName = deleteButton.dataset.userName;
 
       deleteUserForm.action = `/sk-reception/public/admin/users/${userId}`;
-      deleteMessage.textContent = `「${userName}」を削除してもよろしいですか？`;
+      deleteMessage.textContent = `「${userName}」様を削除してもよろしいですか？`;
   });
 });

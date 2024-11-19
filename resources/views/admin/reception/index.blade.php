@@ -2,9 +2,29 @@
 
 @push('scripts')
     <script src="{{ asset('/js/reception-date-clear.js') }}"></script>
+    <script src="{{ asset('/js/reception-modal.js') }}"></script>
 @endpush
 
 @section('content')
+
+<!-- 予約のキャンセル用モーダル -->
+<div class="modal fade" id="cancelReceptionModal" tabindex="-1" aria-labelledby="cancelReceptionModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelReceptionModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+            </div>
+            <div class="modal-footer">
+                <form action="" method="post" name="cancelReceptionForm">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn text-white shadow-sm sk-btn">取消</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="col container">
     <div class="row justify-content-center">
@@ -58,6 +78,7 @@
                         <th scope="col">氏名</th>
                         <th scope="col">フリガナ</th>
                         <th scope="col">受付日時</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,7 +88,9 @@
                             <td>{{ $reception->user->name }}</td>
                             <td>{{ $reception->user->kana }}</td>
                             <td>{{ date('Y年n月j日 G時i分', strtotime($reception->reception_data)) }}</td>
-                        </tr>
+                            <td>
+                                <a href="#" class="link-secondary" data-bs-toggle="modal" data-bs-target="#cancelReceptionModal" data-reception-id="{{ $reception->id }}" data-reception-name="{{ $reception->user->name }}">取消</a>
+                            </tr>
                     @endforeach
                 </tbody>
             </table>

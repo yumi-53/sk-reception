@@ -38,3 +38,11 @@ a {
     background-color: #00076e !important;
     transition: 0.15s;
 }
+.sk-input-btn {
+    color: rgba(var(--bs-link-color-rgb));
+    border: none;
+    background-color: transparent;
+}
+.sk-input-btn:hover {
+    color: rgba(var(--bs-link-hover-color-rgb));
+}
