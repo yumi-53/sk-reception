@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @push('scripts')
-    <script src="{{ asset('/js/reception-modal.js') }}"></script>
+    <script src="{{ asset('/js/reception-delete-modal.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script> const receptionData = @json($monthlyReceptions); </script>
+    <script src="{{ asset('js/receptionChart.js') }}"></script>
 @endpush
 
 @section('content')
@@ -25,10 +28,20 @@
     </div>
 </div>
 
+
 <div class="col container">
     <div class="row justify-content-center">
+        <div class="col-xxl-7 col-xl-10 col-lg-11 mb-5">
+            <h2 class="mb-4 text-center">月別受付人数推移</h2>
+
+            <hr class="mb-4">
+            <!-- グラフ -->
+            <canvas id="receptionChart"></canvas>
+        </div>
+        
         <div class="col-xxl-7 col-xl-10 col-lg-11">
             <h2 class="mb-4 text-center">本日の受付</h2>
+            <hr class="mb-4">
             
             <table class="table table-hover mb-4">
                 <thead>
