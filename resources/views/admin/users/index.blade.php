@@ -2,11 +2,11 @@
 
 @push('scripts')
     <script src="{{ asset('/js/user-modal.js') }}"></script>
-    <script src="{{ asset('/js/reception-modal.js') }}"></script>
+    <script src="{{ asset('/js/reception-create-modal.js') }}"></script>
 @endpush
 
 @section('content')
-<!-- カテゴリの編集用モーダル -->
+<!-- 受付登録用モーダル -->
 <div class="modal fade" id="createReceptionModal" tabindex="-1" aria-labelledby="createReceptionModalLabel">
     <div class="modal-dialog">
         <div class="modal-content">

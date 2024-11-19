@@ -21,7 +21,7 @@ class ReceptionController extends Controller
             $today = Carbon::now()->format('Y-m-d');
             $receptionsData = Reception::whereDate('reception_data', $today);
         }
-        $receptions = $receptionsData->orderBy('reception_data', 'desc')
+        $receptions = $receptionsData->orderBy('reception_data', 'asc')
                                     ->paginate(15); 
         $total = $receptions->total();
 
