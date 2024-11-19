@@ -2,9 +2,28 @@
 
 @push('scripts')
     <script src="{{ asset('/js/user-modal.js') }}"></script>
+    <script src="{{ asset('/js/reception-modal.js') }}"></script>
 @endpush
 
 @section('content')
+<!-- カテゴリの編集用モーダル -->
+<div class="modal fade" id="createReceptionModal" tabindex="-1" aria-labelledby="createReceptionModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createReceptionModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+            </div>
+            <div class="modal-footer">
+            <form method="post" action="{{ route('admin.reception.store') }}" name="createReceptionForm">
+                    @csrf
+                    <input type="hidden" id="user_id" name="user_id" value="">
+                    <button type="submit" class="btn text-white shadow-sm sk-btn">受付</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- ユーザーの削除用モーダル -->
 <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel">
@@ -82,13 +101,7 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->kana }}</td>
-                            <td>
-                                <form method="post" action="{{ route('admin.reception.store') }}" name="login">
-                                    @csrf
-                                    <input type="hidden" id="user_id" name="user_id" value="{{ $user->id }}">
-                                    <button type="submit" class="sk-input-btn">受付</button>
-                                </form>
-                            </td>                            
+                            <td><a href="#" class="link-secondary" data-bs-toggle="modal" data-bs-target="#createReceptionModal" data-reception-id="{{ $user->id }}" data-reception-name="{{ $user->name }}">受付</a></td>
                             <td><a href="{{ route('admin.users.edit', $user) }}">編集</a></td>
                             <td><a href="#" class="link-secondary" data-bs-toggle="modal" data-bs-target="#deleteUserModal" data-user-id="{{ $user->id }}" data-user-name="{{ $user->name }}">削除</a></td>
                         </tr>
